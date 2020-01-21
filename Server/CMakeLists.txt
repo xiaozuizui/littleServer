@@ -11,26 +11,30 @@ cmake_minimum_required (VERSION 3.8)
 set(server_headers 
 Server.h
 epoll.h
-testpb.h
+#testpb.h
 TCPSocket.h
 SocketUtil.h
 GameObject.h
+MemoryBitStream.h
+ReplicationManager.h
 )
 
 set(server_files
 Server.cpp
 epoll.cpp
-testpb.cc
+#testpb.cc
 TCPSocket.cpp
 SocketUtil.cpp
 GameObject.cpp
+MemoryBitStream.cpp
+ReplicationManager.cpp
 )
 
 
 
 
 add_executable (Server ${server_headers} ${server_files})
-target_link_libraries(Server PRIVATE protobuf::libprotoc protobuf::libprotobuf protobuf::libprotobuf-lite)
+#target_link_libraries(Server PRIVATE protobuf::libprotoc protobuf::libprotobuf protobuf::libprotobuf-lite)
 #add_dependencies(protobuf)
 
 #get_cmake_property(_variableNames VARIABLES)

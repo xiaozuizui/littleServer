@@ -5,6 +5,10 @@
 #include <string>
 
 #include "Server.h"
+#include "GameObject.h"
+#include "ReplicationManager.h"
+
+
 using namespace std;
 #define EPOLL
 
@@ -27,6 +31,45 @@ int main(int argc, char** argv)
 
 	//tutorial::Person person;
 	//person.set_email("12@qwe");
+	//
+
+	auto link = &(LinkingContext::getInstance());
+
+	ObjectCreationRegistry::getInstance().RegisterCreationFunction<Person>();
+	Person* p =  static_cast<Person*>(ObjectCreationRegistry::getInstance().CreateGameObject('PERS'));
+
+	p->Set_x(1.0f);
+	p->Set_y(2.0f);
+	p->Set_z(3.0f);
+
+	
+	OutputMemoryBitStream o;
+	p->WriteToBitStream(o);
+
+	char* des;
+	des = static_cast<char*>(std::malloc(12));
+	std::memcpy(des, o.GetBytePtr(), 12);
+
+
+	//收到的bit流
+	InputMemoryBitStream i(des,12);
+
+	/*
+	 * 处理字节流，反序列化，更新世界
+	 * 
+	 */
+	
+	//
+	//char* d = std::realloc(d,o.)
+	//memccpy(d,) 
+	Person n;
+	n.ReadFromBitStream(i);
+
+
+
+
+	
+	//
 
 #ifdef EPOLL
 

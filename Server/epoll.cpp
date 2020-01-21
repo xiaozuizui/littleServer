@@ -1,11 +1,8 @@
 #include "epoll.h"
 
-#include <stdio.h>
+#include <cstdio>
 #include <assert.h>
-#include <stdlib.h>
 #include <unistd.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <string.h> 
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -15,7 +12,6 @@
 #include <iostream>
 
 #include "TCPSocket.h"
-#include "testpb.h"
 #include "SocketUtil.h"
 
 
@@ -189,18 +185,20 @@ void run_action(int epollfd, int index)
 
 			//protobuf
 
-			tutorial::Person p;
-			p.ParseFromArray(fdp->buf, s);
-
+			//序列化数据并处理
+			//tutorial::Person p;
+			//p.ParseFromArray(fdp->buf, s);
+			
 			//printf("\nperson name: %s \n", p.name());
 
-			std::cout << "\n person name " << p.name() << std::endl;
+			//std::cout << "\n person name " << p.name() << std::endl;
+
 			//protobuf
 
-			struct epoll_event evt;
-			evt.events = EPOLLOUT;
-			evt.data.ptr = fdp;
-			epoll_ctl(epollfd, EPOLL_CTL_MOD, fdp->fd, &evt);
+			//struct epoll_event evt;
+			//evt.events = EPOLLOUT;
+			//evt.data.ptr = fdp;
+			//epoll_ctl(epollfd, EPOLL_CTL_MOD, fdp->fd, &evt);
 		}
 		else if (s <= 0)
 		{

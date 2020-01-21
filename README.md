@@ -1,2 +1,0 @@
-# littleServer
- Sample linux Server
